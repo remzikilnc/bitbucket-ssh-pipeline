@@ -1,0 +1,13 @@
+pipelines:
+  default:
+    - step:
+        name: Update to production
+        deployment: production
+        script:
+          - pipe: atlassian/ssh-run:0.4.1
+            variables:
+              SSH_USER: $USER
+              SERVER: $SERVER
+              PORT: $PORT
+              COMMAND: 'cd ../data/web/public_html && git pull'
+              MODE: 'command'
